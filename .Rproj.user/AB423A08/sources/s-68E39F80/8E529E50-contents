@@ -1,0 +1,91 @@
+#Wirecard der Einstieg bis zum Ausstieg (eine Geschichte des DAX)
+#Lukas Marx, 27.08.2020 Fürth, Friedrich-Alexander-Universität Erlangen-Nuernberg
+#Lukas.Marx@Fau.de
+
+library(tseries)
+#Ziehe Volumendaten für die gesamte Daxlaufzeit bis Insolvenz von Yahoo
+Wirecard.volume = get.hist.quote(instrument = "WDI.F", 
+  start = "2018-09-24", end = "2020-06-25",
+  quote = "Volume", provider = "yahoo",
+  compression = "d"
+)
+#Bestimmte das maximale Trading volume
+max.Volume = max(Wirecard.volume)
+
+#Bestimme den Erwartungswert des Tradingvolumens
+mean.Volume = mean(Wirecard.volume)
+#Bestimme die einzelnen Varianzwerte
+Varianz.volume.einzel= (Wirecard.volume - mean.Volume)^2
+#Bestimme die einzelnen Standardabweichungen
+Stabw.Volume.einzel = (Wirecard.volume - mean.Volume)
+#Bestimme die Varianz über die gesamte Zeit
+Varianz.volume.gesamt= sum(Varianz.volume.einzel) / length(Varianz.volume.einzel)
+#Bestimme die Standardabweichung über die gesamte Zeit
+Stabw.Volume.gesamt = sqrt(Varianz.volume.gesamt)
+
+#Bestimmte Abweichungsfaktor für max
+Abweichungsfaktor = (max.Volume - Stabw.Volume.gesamt)/Stabw.Volume.gesamt
+
+
+#Ziehe Volumendaten für 2020 von Yahoo
+Wirecard.volume.2020= get.hist.quote(instrument = "WDI.F", 
+                                     start = "2020-01-01", end = "2020-06-25",
+                                     quote = "Volume", provider = "yahoo",
+                                     compression = "d")
+#Ziehe Volumendaten für 2019 von Yahoo
+Wirecard.volume.2019= get.hist.quote(instrument = "WDI.F", 
+                                     start = "2019-01-01", end = "2019-12-31",
+                                     quote = "Volume", provider = "yahoo",
+                                     compression = "d")
+#Ziehe Volumendaten für 2018 von Yahoo
+Wirecard.volume.2018= get.hist.quote(instrument = "WDI.F", 
+                                     start = "2018-09-24", end = "2018-12-31",
+                                     quote = "Volume", provider = "yahoo",
+                                     compression = "d")
+#Ziehe Valuedaten für 2020 von Yahoo
+Wirecard.value.2020= get.hist.quote(instrument = "WDI.F", 
+                                     start = "2020-01-01", end = "2020-06-25",
+                                     quote = "Adjusted", provider = "yahoo",
+                                     compression = "d")
+#Ziehe Valuedaten für 2019 von Yahoo
+Wirecard.value.2019= get.hist.quote(instrument = "WDI.F", 
+                                     start = "2019-01-01", end = "2019-12-31",
+                                     quote = "Adjusted", provider = "yahoo",
+                                     compression = "d")
+#Ziehe Valuedaten für 2018 von Yahoo
+Wirecard.value.2018= get.hist.quote(instrument = "WDI.F", 
+                                     start = "2018-09-24", end = "2018-12-31",
+                                     quote = "Adjusted", provider = "yahoo",
+                                     compression = "d")
+#Ziehe Valuedaten für die gesamte Daxlaufzeit bis Insolvenz von Yahoo
+Wirecard.value = get.hist.quote(instrument = "WDI.F", 
+                                 start = "2018-09-24", end = "2020-06-25",
+                                 quote = "Adjusted", provider = "yahoo",
+                                 compression = "d"
+)
+
+#Plotte zusammen, was zusammengehört
+plot(Wirecard.value, xlab="2018-2020", ylab="Value (green)", col="green")
+par(new=TRUE)
+plot(Wirecard.volume, xlab=NA, ylab=NA, col="red",axes = F)
+axis(side = 4)
+mtext(side=4,'Volume (red)')
+
+plot(Wirecard.value.2020, xlab="2020",  ylab="Value(green)", col="green")
+par(new=TRUE)
+plot(Wirecard.volume.2020, xlab=NA,  ylab=NA, col="red",axes=F)
+axis(side = 4)
+mtext(side=4,'Volume (red)')
+
+plot(Wirecard.value.2019, xlab="2019",  ylab="Value(green)", col="green")
+par(new=TRUE)
+plot(Wirecard.volume.2019, xlab=NA,  ylab=NA, col="red",axes=F)
+axis(side = 4)
+mtext(side=4,'Volume (red)')
+
+
+plot(Wirecard.value.2018, xlab="2018",  ylab="Value(green)", col="green")
+par(new=TRUE)
+plot(Wirecard.volume.2018, xlab=NA,  ylab=NA, col="red",axes=F)
+axis(side = 4)
+mtext(side=4,'Volume (red)')
