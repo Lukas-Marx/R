@@ -28,8 +28,10 @@ Aktie.varianz.volume.gesamt= sum(Aktie.varianz.volume.einzel) / length(Aktie.var
 #Bestimme die Standardabweichung über die gesamte Zeit
 Aktie.Stabw.volume.gesamt = sqrt(Aktie.varianz.volume.gesamt)
 
+Aktie.Stabw.volume.up = Aktie.mean.volume + Aktie.Stabw.volume.gesamt
+Aktie.Stabw.volume.down = Aktie.mean.volume - Aktie.Stabw.volume.gesamt
 #Bestimmte Abweichungsfaktor für max
-Aktie.Abweichungsfaktor = (Aktie.max.volume - Aktie.Stabw.volume.gesamt)/Aktie.Stabw.volume.gesamt
+Aktie.Abweichungsfaktor.volume = (Aktie.max.volume - Aktie.Stabw.volume.gesamt)/Aktie.Stabw.volume.gesamt
 
 
 
@@ -53,8 +55,11 @@ Aktie.varianz.Adjusted.gesamt= sum(Aktie.varianz.Adjusted.einzel) / length(Aktie
 #Bestimme die Standardabweichung über die gesamte Zeit
 Aktie.Stabw.Adjusted.gesamt = sqrt(Aktie.varianz.Adjusted.gesamt)
 
+Aktie.Stabw.Adjusted.up = Aktie.mean.Adjusted + Aktie.Stabw.Adjusted.gesamt
+Aktie.Stabw.Adjusted.down = Aktie.mean.Adjusted - Aktie.Stabw.Adjusted.gesamt
+
 #Bestimmte Abweichungsfaktor für max
-Aktie.Abweichungsfaktor = (Aktie.max.Adjusted - Aktie.Stabw.Adjusted.gesamt)/Aktie.Stabw.Adjusted.gesamt
+Aktie.Abweichungsfaktor.Adjusted = (Aktie.max.Adjusted - Aktie.Stabw.Adjusted.gesamt)/Aktie.Stabw.Adjusted.gesamt
 
 
 Index.Adjusted = get.hist.quote(instrument = Vergleichsindex, 
@@ -77,5 +82,46 @@ Index.varianz.Adjusted.gesamt= sum(Index.varianz.Adjusted.einzel) / length(Index
 #Bestimme die Standardabweichung über die gesamte Zeit
 Index.Stabw.Adjusted.gesamt = sqrt(Index.varianz.Adjusted.gesamt)
 
+Index.Stabw.Adjusted.up = Index.mean.Adjusted + Index.Stabw.Adjusted.gesamt
+Index.Stabw.Adjusted.down = Index.mean.Adjusted - Index.Stabw.Adjusted.gesamt
+
 #Bestimmte Abweichungsfaktor für max
-Index.Abweichungsfaktor = (Index.max.Adjusted - Index.Stabw.Adjusted.gesamt)/Index.Stabw.Adjusted.gesamt
+Index.Abweichungsfaktor.Adjusted = (Index.max.Adjusted - Index.Stabw.Adjusted.gesamt)/Index.Stabw.Adjusted.gesamt
+
+#Aktie Adjusted und Volume
+plot(Aktie.Adjusted, xlab="Zeitraum", ylab="Aktie (green)", col="green")
+par(new=TRUE)
+plot(Aktie.volume, xlab=NA, ylab=NA, col="red",axes = F)
+axis(side = 4)
+mtext(side=4,'Volume (red)')
+
+#Aktie Volumen 
+plot(Aktie.volume, xlab="Zeitraum", ylab='Volume (red)', col="red")
+abline(h = Aktie.Stabw.volume.down, lty =2, col= "blue")
+abline(h = Aktie.Stabw.volume.up, lty =2, col= "blue")
+abline(h = Aktie.mean.volume, col= "blue")
+
+#Aktie Adjusted 
+plot(Aktie.Adjusted, xlab="Zeitraum", ylab='Aktie (green)', col="green")
+abline(h = Aktie.Stabw.Adjusted.down, lty =2, col= "blue")
+abline(h = Aktie.Stabw.Adjusted.up, lty =2, col= "blue")
+abline(h = Aktie.mean.Adjusted, col= "blue")
+
+#Index Adjusted 
+plot(Index.Adjusted, xlab="Zeitraum", ylab='Index (green)', col="green")
+abline(h = Index.Stabw.Adjusted.down, lty =2, col= "blue")
+abline(h = Index.Stabw.Adjusted.up, lty =2, col= "blue")
+abline(h = Index.mean.Adjusted, col= "blue")
+
+#Aktie Adjusted und Index Adjusted
+plot(Aktie.Adjusted, xlab="Zeitraum", ylab="Aktie (green)/(blue)", col="green")
+abline(h = Aktie.Stabw.Adjusted.down, lty =2, col= "blue")
+abline(h = Aktie.Stabw.Adjusted.up, lty =2, col= "blue")
+abline(h = Aktie.mean.Adjusted, col= "blue")
+par(new=TRUE)
+plot(Index.Adjusted, xlab=NA, ylab=NA, col="red",axes = F)
+abline(h = Index.Stabw.Adjusted.down, lty =2, col= "black")
+abline(h = Index.Stabw.Adjusted.up, lty =2, col= "black")
+abline(h = Index.mean.Adjusted, col= "black")
+axis(side = 4)
+mtext(side=4,'Index (red)/(black)')
