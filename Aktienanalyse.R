@@ -91,12 +91,12 @@ Index.Abweichungsfaktor.Adjusted = (Index.max.Adjusted - Index.Stabw.Adjusted.ge
 #Aktie Adjusted und Volume
 plot(Aktie.Adjusted, xlab="Zeitraum", ylab="Aktie (green)", col="green")
 par(new=TRUE)
-plot(Aktie.volume, xlab=NA, ylab=NA, col="red",axes = F)
+plot(Aktie.volume, xlab=NA, ylab=NA, col="purple",axes = F)
 axis(side = 4)
-mtext(side=4,'Volume (red)')
+mtext(side=4,'Volume (purple)')
 
 #Aktie Volumen 
-plot(Aktie.volume, xlab="Zeitraum", ylab='Volume (red)', col="red")
+plot(Aktie.volume, xlab="Zeitraum", ylab='Volume (purple)', col="purple")
 abline(h = Aktie.Stabw.volume.down, lty =2, col= "blue")
 abline(h = Aktie.Stabw.volume.up, lty =2, col= "blue")
 abline(h = Aktie.mean.volume, col= "blue")
@@ -108,7 +108,7 @@ abline(h = Aktie.Stabw.Adjusted.up, lty =2, col= "blue")
 abline(h = Aktie.mean.Adjusted, col= "blue")
 
 #Index Adjusted 
-plot(Index.Adjusted, xlab="Zeitraum", ylab='Index (green)', col="green")
+plot(Index.Adjusted, xlab="Zeitraum", ylab='Index (red)', col="red")
 abline(h = Index.Stabw.Adjusted.down, lty =2, col= "blue")
 abline(h = Index.Stabw.Adjusted.up, lty =2, col= "blue")
 abline(h = Index.mean.Adjusted, col= "blue")
