@@ -4,16 +4,16 @@ library(tseries)
 Aktie = "DHER.DE"
 Vergleichsindex = "^GDAXI"
 
-Start = "2020-08-17"
+Start = "2018-08-23"
 Ende = "2020-08-31"
 
 
-Aktie.volume = get.hist.quote(instrument = Aktie, 
+Aktie.volume1 = get.hist.quote(instrument = Aktie, 
                                  start = Start, end = Ende,
                                  quote = "Volume", provider = "yahoo",
                                  compression = "d"
 )
-
+Aktie.volume = na.omit(Aktie.volume1)
 #Bestimmte das maximale Trading volume
 Aktie.max.volume = max(Aktie.volume)
 
@@ -35,12 +35,12 @@ Aktie.Abweichungsfaktor.volume = (Aktie.max.volume - Aktie.Stabw.volume.gesamt)/
 
 
 
-Aktie.Adjusted = get.hist.quote(instrument = Aktie, 
+Aktie.Adjusted1 = get.hist.quote(instrument = Aktie, 
                               start = Start, end = Ende,
                               quote = "Adjusted", provider = "yahoo",
                               compression = "d"
 )
-
+Aktie.Adjusted = na.omit(Aktie.Adjusted1)
 #Bestimmte das maximale Trading Adjusted
 Aktie.max.Adjusted = max(Aktie.Adjusted)
 
@@ -62,11 +62,12 @@ Aktie.Stabw.Adjusted.down = Aktie.mean.Adjusted - Aktie.Stabw.Adjusted.gesamt
 Aktie.Abweichungsfaktor.Adjusted = (Aktie.max.Adjusted - Aktie.Stabw.Adjusted.gesamt)/Aktie.Stabw.Adjusted.gesamt
 
 
-Index.Adjusted = get.hist.quote(instrument = Vergleichsindex, 
+Index.Adjusted1 = get.hist.quote(instrument = Vergleichsindex, 
                               start = Start, end = Ende,
                               quote = "Adjusted", provider = "yahoo",
                               compression = "d"
 )
+Index.Adjusted = na.omit(Index.Adjusted1)
 
 #Bestimmte das maximale Trading Adjusted
 Index.max.Adjusted = max(Index.Adjusted)
