@@ -5,7 +5,7 @@ Aktie = "DHER.DE"
 Vergleichsindex = "^GDAXI"
 
 Start = "2018-08-23"
-Ende = "2020-08-31"
+Ende = "2020-09-01"
 
 
 Aktie.volume1 = get.hist.quote(instrument = Aktie, 
@@ -128,8 +128,9 @@ axis(side = 4)
 mtext(side=4,'Index (red)/(black)')
 
 #Aktie Adjusted und Index Adjusted ohne Erw. STAB
-plot(Aktie.Adjusted, xlab="Zeitraum", ylab="Aktie (green)/(blue)", col="green")
+plot(Aktie.Adjusted, xlab="Zeitraum", ylab="Aktie (green)", col="green")
 par(new=TRUE)
 plot(Index.Adjusted, xlab=NA, ylab=NA, col="red",axes = F)
 axis(side = 4)
-mtext(side=4,'Index (red)/(black)')
+mtext(side=4,'Index (red)')
+
