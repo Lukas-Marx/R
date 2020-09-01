@@ -1,6 +1,7 @@
 #Lukas Marx, 27.08.2020 Fürth, Friedrich-Alexander-Universität Erlangen-Nuernberg
 #Lukas.Marx@Fau.de
 library(tseries)
+library(zoo)
 Aktie = "DHER.DE"
 Vergleichsindex = "^GDAXI"
 
@@ -105,6 +106,25 @@ legend("topleft", legend = c("EV", "SD"), col = c("blue","blue"), lty = 1:2)
 
 #Aktie Adjusted 
 plot(Aktie.Adjusted, xlab="Zeitraum", ylab='Aktie (green)', col="green")
+abline(h = Aktie.Stabw.Adjusted.down, lty =2, col= "blue")
+abline(h = Aktie.Stabw.Adjusted.up, lty =2, col= "blue")
+abline(h = Aktie.mean.Adjusted, col= "blue")
+legend("topleft", legend = c("EV", "SD"), col = c("blue","blue"), lty = 1:2)
+
+#Subsequence Volume
+Teilzeitreihe.Volume = window(Aktie.volume, start = as.Date("2020-08-24"), end = as.Date("2020-09-01"))
+#Subsequence Adjusted
+Teilzeitreihe.Adjusted = window(Aktie.Adjusted, start = as.Date("2020-08-24"), end = as.Date("2020-09-01"))               
+
+#Aktie Volumen Subsequence
+plot(Teilzeitreihe.Volume, xlab="Zeitraum", ylab='Volume (purple)', col="purple")
+abline(h = Aktie.Stabw.volume.down, lty =2, col= "blue")
+abline(h = Aktie.Stabw.volume.up, lty =2, col= "blue")
+abline(h = Aktie.mean.volume, col= "blue")
+legend("topleft", legend = c("EV", "SD"), col = c("blue","blue"), lty = 1:2)
+
+#Aktie Adjusted Subsequence
+plot(Teilzeitreihe.Adjusted, xlab="Zeitraum", ylab='Aktie (green)', col="green")
 abline(h = Aktie.Stabw.Adjusted.down, lty =2, col= "blue")
 abline(h = Aktie.Stabw.Adjusted.up, lty =2, col= "blue")
 abline(h = Aktie.mean.Adjusted, col= "blue")
