@@ -8,6 +8,9 @@ Vergleichsindex = "^GDAXI"
 Start = "2018-08-23"
 Ende = "2020-09-01"
 
+Subsequence.Start = "2020-08-24"
+Subsequence.Ende = "2020-09-01"
+
 
 Aktie.volume1 = get.hist.quote(instrument = Aktie, 
                                  start = Start, end = Ende,
@@ -112,9 +115,9 @@ abline(h = Aktie.mean.Adjusted, col= "blue")
 legend("topleft", legend = c("EV", "SD"), col = c("blue","blue"), lty = 1:2)
 
 #Subsequence Volume
-Teilzeitreihe.Volume = window(Aktie.volume, start = as.Date("2020-08-24"), end = as.Date("2020-09-01"))
+Teilzeitreihe.Volume = window(Aktie.volume, start = as.Date(Subsequence.Start), end = as.Date(Subsequence.Ende))
 #Subsequence Adjusted
-Teilzeitreihe.Adjusted = window(Aktie.Adjusted, start = as.Date("2020-08-24"), end = as.Date("2020-09-01"))               
+Teilzeitreihe.Adjusted = window(Aktie.Adjusted, start = as.Date(Subsequence.Start), end = as.Date(Subsequence.Ende))               
 
 #Aktie Volumen Subsequence
 plot(Teilzeitreihe.Volume, xlab="Zeitraum", ylab='Volume (purple)', col="purple")
