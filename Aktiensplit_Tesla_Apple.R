@@ -127,20 +127,24 @@ StabW_TSLA_whole_vol_sub2 = sqrt(Var_TSLA_whole_vol_sub2)
 Stabw_TSLA_whole_vol_sub2_up = ERW_TSLA_whole_vol_sub2 + StabW_TSLA_whole_vol_sub2
 Stabw_TSLA_whole_vol_sub2_down = ERW_TSLA_whole_vol_sub2 - StabW_TSLA_whole_vol_sub2
 
-
-plot(Aktie.volume1, xlab="gesamter Zeitraum", ylab='Volume AAPL (purple)', col="purple")
+png("AAPL_Vol.png", width = 3.840, height = 2.160)
+plot(Aktie.volume1, xlab="gesamter Zeitraum", ylab='Volume AAPL (black)', col="black")
 abline(h = Stabw_AAPL_whole_vol_up, lty =2, col= "blue")
 abline(h = Stabw_AAPL_whole_vol_down, lty =2, col= "blue")
 abline(h = ERW_AAPL_whole_vol, col= "blue")
 legend("topleft", legend = c("EV", "SD"), col = c("blue","blue"), lty = 1:2,cex = 0.6)
+dev.off
 
-plot(Aktie.volume2, xlab="gesamter Zeitraum", ylab='Volume TSLA (purple)', col="purple")
+png("TSLA_Vol.png", width = 3.840, height = 2.160)
+plot(Aktie.volume2, xlab="gesamter Zeitraum", ylab='Volume TSLA (black)', col="black")
 abline(h = Stabw_TSLA_whole_vol_up, lty =2, col= "blue")
 abline(h = Stabw_TSLA_whole_vol_down, lty =2, col= "blue")
 abline(h = ERW_TSLA_whole_vol, col= "blue")
 legend("topleft", legend = c("EV", "SD"), col = c("blue","blue"), lty = 1:2,cex = 0.6)
+dev.off
 
-plot(Aktie.volume1, xlab="gesamter Zeitraum", ylab='Volume AAPL (purple)', col="purple")
+png("AAPL_Vol_with_subsequence.png", width = 3.840, height = 2.160)
+plot(Aktie.volume1, xlab="gesamter Zeitraum", ylab='Volume AAPL (black)', col="black")
 abline(h = Stabw_AAPL_whole_vol_sub1_up, lty =2, col= "blue")
 abline(h = Stabw_AAPL_whole_vol_sub1_down, lty =2, col= "blue")
 abline(h = ERW_AAPL_whole_vol_sub1, col= "blue")
@@ -148,8 +152,10 @@ abline(h = Stabw_AAPL_whole_vol_sub2_up, lty =2, col= "red")
 abline(h = Stabw_AAPL_whole_vol_sub2_down, lty =2, col= "red")
 abline(h = ERW_AAPL_whole_vol_sub2, col= "red")
 legend("topleft", legend = c("EV_pre", "SD_pre","EV_post","SD_post"), col = c("blue","blue","red","red"), lty = 1:2,cex = 0.6)
+dev.off
 
-plot(Aktie.volume2, xlab="gesamter Zeitraum", ylab='Volume TSLA (purple)', col="purple")
+png("TSLA_Vol_with_subsequence.png", width = 3.840, height = 2.160)
+plot(Aktie.volume2, xlab="gesamter Zeitraum", ylab='Volume TSLA (black)', col="black")
 abline(h = Stabw_TSLA_whole_vol_sub1_up, lty =2, col= "blue")
 abline(h = Stabw_TSLA_whole_vol_sub1_down, lty =2, col= "blue")
 abline(h = ERW_TSLA_whole_vol_sub1, col= "blue")
@@ -157,6 +163,7 @@ abline(h = Stabw_TSLA_whole_vol_sub2_up, lty =2, col= "red")
 abline(h = Stabw_TSLA_whole_vol_sub2_down, lty =2, col= "red")
 abline(h = ERW_TSLA_whole_vol_sub2, col= "red")
 legend("topleft", legend = c("EV_pre", "SD_pre","EV_post","SD_post"), col = c("blue","blue","red","red"), lty = 1:2,cex = 0.6)
+dev.off
 
 ERW_AAPL_whole_adj = mean (Aktie.Adjusted1)
 ERW_TSLA_whole_adj = mean(Aktie.Adjusted2)
@@ -197,20 +204,24 @@ StabW_TSLA_whole_adj_sub2 = sqrt(Var_TSLA_whole_adj_sub2)
 Stabw_TSLA_whole_adj_sub2_up = ERW_TSLA_whole_adj_sub2 + StabW_TSLA_whole_adj_sub2
 Stabw_TSLA_whole_adj_sub2_down = ERW_TSLA_whole_adj_sub2 - StabW_TSLA_whole_adj_sub2
 
-
-plot(Aktie.Adjusted1, xlab="gesamter Zeitraum", ylab='Adjusted Stock AAPL (purple)', col="purple")
+png("AAPL_Adj.png", width = 3.840, height = 2.160)
+plot(Aktie.Adjusted1, xlab="gesamter Zeitraum", ylab='Adjusted Stock AAPL (black)', col="black")
 abline(h = Stabw_AAPL_whole_adj_up, lty =2, col= "blue")
 abline(h = Stabw_AAPL_whole_adj_down, lty =2, col= "blue")
 abline(h = ERW_AAPL_whole_adj, col= "blue")
 legend("topleft", legend = c("EV", "SD"), col = c("blue","blue"), lty = 1:2,cex = 0.6)
+dev.off
 
-plot(Aktie.Adjusted2, xlab="gesamter Zeitraum", ylab='Adjusted Stock TSLA (purple)', col="purple")
+png("TSLA_Adj.png", width = 3.840, height = 2.160)
+plot(Aktie.Adjusted2, xlab="gesamter Zeitraum", ylab='Adjusted Stock TSLA (black)', col="black")
 abline(h = Stabw_TSLA_whole_adj_up, lty =2, col= "blue")
 abline(h = Stabw_TSLA_whole_adj_down, lty =2, col= "blue")
 abline(h = ERW_TSLA_whole_adj, col= "blue")
 legend("topleft", legend = c("EV", "SD"), col = c("blue","blue"), lty = 1:2,cex = 0.6)
+dev.off
 
-plot(Aktie.Adjusted1, xlab="gesamter Zeitraum", ylab='Adjusted Stock AAPL (purple)', col="purple")
+png("AAPL_Adj_with_subsequence.png", width = 3.840, height = 2.160)
+plot(Aktie.Adjusted1, xlab="gesamter Zeitraum", ylab='Adjusted Stock AAPL (black)', col="black")
 abline(h = Stabw_AAPL_whole_adj_sub1_up, lty =2, col= "blue")
 abline(h = Stabw_AAPL_whole_adj_sub1_down, lty =2, col= "blue")
 abline(h = ERW_AAPL_whole_adj_sub1, col= "blue")
@@ -218,8 +229,10 @@ abline(h = Stabw_AAPL_whole_adj_sub2_up, lty =2, col= "red")
 abline(h = Stabw_AAPL_whole_adj_sub2_down, lty =2, col= "red")
 abline(h = ERW_AAPL_whole_adj_sub2, col= "red")
 legend("topleft", legend = c("EV_pre", "SD_pre","EV_post","SD_post"), col = c("blue","blue","red","red"), lty = 1:2,cex = 0.6)
+dev.off
 
-plot(Aktie.Adjusted2, xlab="gesamter Zeitraum", ylab='Adjusted Stock TSLA (purple)', col="purple")
+png("TSLA_Adj_with_subsequence.png", width = 3.840, height = 2.160)
+plot(Aktie.Adjusted2, xlab="gesamter Zeitraum", ylab='Adjusted Stock TSLA (black)', col="black")
 abline(h = Stabw_TSLA_whole_adj_sub1_up, lty =2, col= "blue")
 abline(h = Stabw_TSLA_whole_adj_sub1_down, lty =2, col= "blue")
 abline(h = ERW_TSLA_whole_adj_sub1, col= "blue")
@@ -227,3 +240,4 @@ abline(h = Stabw_TSLA_whole_adj_sub2_up, lty =2, col= "red")
 abline(h = Stabw_TSLA_whole_adj_sub2_down, lty =2, col= "red")
 abline(h = ERW_TSLA_whole_adj_sub2, col= "red")
 legend("topleft", legend = c("EV_pre", "SD_pre","EV_post","SD_post"), col = c("blue","blue","red","red"), lty = 1:2,cex = 0.6)
+dev.off
