@@ -4,16 +4,16 @@ library(tseries)
 library(zoo)
 
 Start = "2019-03-11"
-Ende = "2020-09-01"
+Ende = "2020-09-12"
 
 Subsequence1.Start= "2020-03-11"
-Subsequence1.Ende = "2020-08-31"
+Subsequence1.Ende = "2020-09-12"
 
 Subsequence2.Start = "2019-09-01"
 Subsequence2.Ende ="2020-03-10"
 
 Subsequence3.Start = "2019-03-11"
-Subsequence3.Ende = "2019-08-31"
+Subsequence3.Ende = "2019-09-12"
 
 
 Volume = list()
@@ -54,7 +54,7 @@ abline(v = as.Date(Subsequence2.Start), col= "yellow")
 abline(h = mean.s1, col= "blue")
 abline(h = mean.s2, col= "green")
 abline(h = mean.s3, col= "purple")
-legend("topleft",legend = c("2019-09-01", "2020-03-11","MW Abschnitt 1", "MW Abschnitt 2","MW Abschnitt 3"), col = c("yellow","red","purple","green","blue"),lty = 1,cex = 0.7)
+legend("topleft",legend = c("2019-09-11", "2020-03-11","MW Abschnitt 1", "MW Abschnitt 2","MW Abschnitt 3"), col = c("yellow","red","purple","green","blue"),lty = 1,cex = 0.7)
 
 plot(Subsequence1, xlab = NA, ylab = "Teilabschnitt 3")
 abline(h = mean.s1, col= "blue")
