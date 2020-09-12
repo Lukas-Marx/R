@@ -126,3 +126,16 @@ Var_TSLA_whole_vol_sub2 = sum(Var_TSLA_single_vol_sub2) / length(Var_TSLA_single
 StabW_TSLA_whole_vol_sub2 = sqrt(Var_TSLA_whole_vol_sub2)
 Stabw_TSLA_whole_vol_sub2_up = ERW_TSLA_whole_vol_sub2 + StabW_TSLA_whole_vol_sub2
 Stabw_TSLA_whole_vol_sub2_down = ERW_TSLA_whole_vol_sub2 - StabW_TSLA_whole_vol_sub2
+
+
+plot(Aktie.volume1, xlab="gesamter Zeitraum", ylab='Volume AAPL (purple)', col="purple")
+abline(h = Stabw_AAPL_whole_vol_up, lty =2, col= "blue")
+abline(h = Stabw_AAPL_whole_vol_down, lty =2, col= "blue")
+abline(h = Stabw_AAPL_whole_vol, col= "blue")
+legend("topleft", legend = c("EV", "SD"), col = c("blue","blue"), lty = 1:2,cex = 0.6)
+
+plot(Aktie.volume2, xlab="gesamter Zeitraum", ylab='Volume TSLA (purple)', col="purple")
+abline(h = Stabw_TSLA_whole_vol_up, lty =2, col= "blue")
+abline(h = Stabw_TSLA_whole_vol_down, lty =2, col= "blue")
+abline(h = Stabw_TSLA_whole_vol, col= "blue")
+legend("topleft", legend = c("EV", "SD"), col = c("blue","blue"), lty = 1:2,cex = 0.6)
