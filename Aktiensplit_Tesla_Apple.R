@@ -4,13 +4,13 @@ library(tseries)
 library(zoo)
 
 Start = "2020-07-30"
-Ende = "2020-09-30"
+Ende = "2020-10-01"
 
 Subsequence1.Start= "2020-07-30"
 Subsequence1.Ende = "2020-08-31"
 
 Subsequence2.Start = "2020-09-01"
-Subsequence2.Ende ="2020-09-30"
+Subsequence2.Ende ="2020-10-01"
 
 Aktie1 = "AAPL"
 Aktie2 = "TSLA"
