@@ -253,8 +253,9 @@ legend("topleft", legend = c("EV_pre", "SD_pre","EV_post","SD_post","Splitdate")
 dev.off()
 
 
-par(mfrow=c(1,2))
+
 png("TSLA.png", width = 1280, height = 720)
+par(mfrow=c(2,1))
 plot(Aktie.volume2, xlab="gesamter Zeitraum", ylab='Volume TSLA (black)', col="black")
 abline(v=as.Date(Subsequence2.Start),col="green")
 abline(h = Stabw_TSLA_whole_vol_sub1_up, lty =2, col= "blue")
@@ -276,8 +277,9 @@ abline(h = ERW_TSLA_whole_adj_sub2, col= "red")
 legend("topleft", legend = c("EV_pre", "SD_pre","EV_post","SD_post","Splitdate"), col = c("blue","blue","red","red","green"), lty = 1:2,cex = 0.6)
 dev.off()
 
-par(mfrow=c(1,2))
+
 png("APPL.png", width = 1280, height = 720)
+par(mfrow=c(2,1))
 plot(Aktie.volume1, xlab="gesamter Zeitraum", ylab='Volume AAPL (black)', col="black")
 abline(v=as.Date(Subsequence2.Start),col="green")
 abline(h = Stabw_AAPL_whole_vol_sub1_up, lty =2, col= "blue")
