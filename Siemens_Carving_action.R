@@ -18,42 +18,57 @@ Aktie.Volume1 = get.hist.quote(instrument = Aktie1,
                                quote = "Volume", provider = "yahoo",
                                compression = "d"
 )
-Aktie.Volume1 = na.fill(Aktie.Volume1,0)
+Aktie.Volume1 = na.omit(Aktie.Volume1)
 
 Aktie.Volume2 = get.hist.quote(instrument = Aktie2, 
                                start = Start, end = Ende,
                                quote = "Volume", provider = "yahoo",
                                compression = "d"
 )
-Aktie.Volume2 = na.fill(Aktie.Volume2,0)
+Aktie.Volume2 = na.omit(Aktie.Volume2)
 
 Aktie.Volume3 = get.hist.quote(instrument = Aktie3, 
                                start = Start, end = Ende,
                                quote = "Volume", provider = "yahoo",
                                compression = "d"
 )
-Aktie.Volume3 = na.fill(Aktie.Volume3,0)
+Aktie.Volume3 = na.omit(Aktie.Volume3)
 
 Aktie.Adjusted1 = get.hist.quote(instrument = Aktie1, 
                                  start = Start, end = Ende,
                                  quote = "Adjusted", provider = "yahoo",
                                  compression = "d"
 )
-Aktie.Adjusted1 = na.fill(Aktie.Adjusted1,0)
+Aktie.Adjusted1 = na.omit(Aktie.Adjusted1)
 
 Aktie.Adjusted2 = get.hist.quote(instrument = Aktie2, 
                                  start = Start, end = Ende,
                                  quote = "Adjusted", provider = "yahoo",
                                  compression = "d"
 )
-Aktie.Adjusted2 = na.fill(Aktie.Adjusted2,0)
+Aktie.Adjusted2 = na.omit(Aktie.Adjusted2)
 
 Aktie.Adjusted3 = get.hist.quote(instrument = Aktie3, 
                                  start = Start, end = Ende,
                                  quote = "Adjusted", provider = "yahoo",
                                  compression = "d"
 )
-Aktie.Adjusted3 = na.fill(Aktie.Adjusted3,0)
+Aktie.Adjusted3 = na.omit(Aktie.Adjusted3)
 
-PF.Adjusted = Aktie.Adjusted1 + Aktie.Adjusted2 + Aktie.Adjusted3
+PF.Adjusted = cbind(Aktie.Adjusted1, Aktie.Adjusted2, Aktie.Adjusted3)
 PF.Volume=  Aktie.Volume1 + Aktie.Volume2 + Aktie.Volume3
+PF.Adjusted1 = Aktie.Adjusted1 + Aktie.Adjusted2
+PF.Adjusted2 = PF.Adjusted1 + Aktie.Adjusted3
+PF.Adjusted0 = get.hist.quote(instrument = Aktie1, 
+                              start = Start, end = Health.Start,
+                              quote = "Adjusted", provider = "yahoo",
+                              compression = "d"
+)
+PF.Volume0 = get.hist.quote(instrument = Aktie1, 
+                              start = Start, end = Health.Start,
+                              quote = "Volume", provider = "yahoo",
+                              compression = "d"
+)
+PF.Volume1 = Aktie.Volume1 + Aktie.Volume2
+PF.Volume2 = PF.Volume1 + Aktie.Volume3
+
