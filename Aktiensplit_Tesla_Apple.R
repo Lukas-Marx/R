@@ -2,7 +2,24 @@
 #Lukas.Marx@Fau.de
 library(tseries)
 library(zoo)
+library(quantmod)
+compute_normalReturn.marketmodel <- function(estimationWindow.prices_stock, estimationWindow.prices_market, actualReturn.price_market) {
+  # Ordinary Least Squares (OLS)
+  M = lm(estimationWindow.prices_stock ~ estimationWindow.prices_market)
+  
+  nd = data.frame(estimationWindow.prices_market = actualReturn.price_market)
+  normalReturn = predict(M, newdata = nd)
+  
+  return(normalReturn)
+}
 
+
+compute_normalReturn.constantmeanmodel <- function(estimationWindow.prices_stock) {
+  
+  normalReturn = mean(estimationWindow.prices_stock)
+  
+  return(normalReturn)
+}
 abnormalReturn <- function(prices_stock, prices_market=NULL, from=NULL, to=NULL,
                            model = "marketmodel",
                            estimationWindowLength = 10, c = 10, attributeOfInterest = "Close",
@@ -224,7 +241,6 @@ plotEventStudy <- function(prices_stock, prices_market,
          col = "green",
          pch = 4)
 }
-
 Start = "2020-07-30"
 Ende = "2020-10-01"
 
@@ -236,6 +252,9 @@ Subsequence2.Ende ="2020-10-01"
 
 Aktie1 = "AAPL"
 Aktie2 = "TSLA"
+
+AR_Tsla = abnormalReturn(Aktie1,"^GSPC",Start, Ende,model="marketmodel", estimationWindowLength = 2,
+                         c=5, attributeOfInterest = "Adjusted",showPlot = FALSE)
 
 Aktie.volume1 = get.hist.quote(instrument = Aktie1, 
                                start = Start, end = Ende,
@@ -523,3 +542,7 @@ abline(h = ERW_AAPL_whole_adj_sub2, col= "red")
 legend("topleft", legend = c("EV_pre", "SD_pre","EV_post","SD_post","Splitdate"), col = c("blue","blue","red","red","green"), lty = 1:2,cex = 0.6)
 
 dev.off()
+
+plot(AR_Tsla$Date,AR_Tsla$abnormalReturn)
+abline (h = 0,col= "blue")
+
