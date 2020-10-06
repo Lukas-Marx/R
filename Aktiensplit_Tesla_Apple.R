@@ -139,7 +139,7 @@ abnormalReturn <- function(prices_stock, prices_market=NULL, from=NULL, to=NULL,
     }
   }
   
-  if (estimationWindowLength < 5) {
+  if (estimationWindowLength < 1) {
     stop("An estimation window size of at least 5 time steps is recommend for the regression to produce meaningful results.")
   }
   
@@ -253,8 +253,10 @@ Subsequence2.Ende ="2020-10-01"
 Aktie1 = "AAPL"
 Aktie2 = "TSLA"
 
-AR_Tsla = abnormalReturn(Aktie1,"^GSPC",Start, Ende,model="marketmodel", estimationWindowLength = 2,
-                         c=5, attributeOfInterest = "Adjusted",showPlot = FALSE)
+AR_Tsla = abnormalReturn(Aktie1,"^GSPC",Start, Ende,model="marketmodel", estimationWindowLength = 1,
+                         c=5, attributeOfInterest = "Adjusted",showPlot = TRUE)
+AV_Tsla = abnormalReturn(Aktie1,"^GSPC",Start, Ende,model="marketmodel", estimationWindowLength = 1,
+                         c=5, attributeOfInterest = "Volume",showPlot = TRUE)
 
 Aktie.volume1 = get.hist.quote(instrument = Aktie1, 
                                start = Start, end = Ende,
@@ -543,6 +545,11 @@ legend("topleft", legend = c("EV_pre", "SD_pre","EV_post","SD_post","Splitdate")
 
 dev.off()
 
-plot(AR_Tsla$Date,AR_Tsla$abnormalReturn)
-abline (h = 0,col= "blue")
 
+plot(AR_Tsla$Date,AR_Tsla$abnormalReturn, xlab = "Datum", ylab="Daily Abnormal Returns TSLA")
+abline (h = 0,col= "blue")
+abline (v= as.POSIXct("2020-08-11 02:00:00"), lty = 2,col ="red")
+
+plot(AV_Tsla$Date, AV_Tsla$abnormalReturn, xlab = "Datum", ylab="Daily Abnormal Volume TSLA")
+abline (h = 0, col="blue")
+abline (v= as.POSIXct("2020-08-11 02:00:00"), lty = 2,col ="red")
