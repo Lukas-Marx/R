@@ -225,7 +225,6 @@ plotEventStudy <- function(prices_stock, prices_market,
          pch = 4)
 }
 
-
 Start = "2017-01-01"
 Ende = "2020-10-03"
 
