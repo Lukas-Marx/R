@@ -549,7 +549,10 @@ dev.off()
 plot(AR_Tsla$Date,AR_Tsla$abnormalReturn, xlab = "Datum", ylab="Daily Abnormal Returns TSLA")
 abline (h = 0,col= "blue")
 abline (v= as.POSIXct("2020-08-11 02:00:00"), lty = 2,col ="red")
+abline (v= as.POSIXct("2020-08-28 02:00:00"), lty = 2,col ="green")
 
 plot(AV_Tsla$Date, AV_Tsla$abnormalReturn, xlab = "Datum", ylab="Daily Abnormal Volume TSLA")
 abline (h = 0, col="blue")
 abline (v= as.POSIXct("2020-08-11 02:00:00"), lty = 2,col ="red")
+abline (v= as.POSIXct("2020-08-28 02:00:00"), lty = 2,col ="green")
+
