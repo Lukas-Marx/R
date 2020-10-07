@@ -1,4 +1,4 @@
-#Lukas Marx, 11.09.2020 Fürth, Friedrich-Alexander-Universität Erlangen-Nuernberg
+#Lukas Marx, 07.10.2020 Fürth, Friedrich-Alexander-Universität Erlangen-Nuernberg
 #Lukas.Marx@Fau.de
 library(tseries)
 library(zoo)
