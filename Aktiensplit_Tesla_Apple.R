@@ -545,14 +545,22 @@ legend("topleft", legend = c("EV_pre", "SD_pre","EV_post","SD_post","Splitdate")
 
 dev.off()
 
+reg_line_AR = lm(AR_Tsla$abnormalReturn~AR_Tsla$Date)
+AR_reg = fitted.values(reg_line_AR)
+AR_reg_res = residuals(reg_line_AR)
+
+reg_line_AV = lm(AV_Tsla$abnormalReturn~AV_Tsla$Date)
+AV_reg = fitted.values(reg_line_AV)
+AV_reg_res = residuals(reg_line_AV)
 
 plot(AR_Tsla$Date,AR_Tsla$abnormalReturn, xlab = "Datum", ylab="Daily Abnormal Returns TSLA")
-abline (h = 0,col= "blue")
+abline (h = 0,col= "black")
 abline (v= as.POSIXct("2020-08-11 02:00:00"), lty = 2,col ="red")
 abline (v= as.POSIXct("2020-08-28 02:00:00"), lty = 2,col ="green")
+abline (reg_line_AR,col ="blue")
 
 plot(AV_Tsla$Date, AV_Tsla$abnormalReturn, xlab = "Datum", ylab="Daily Abnormal Volume TSLA")
-abline (h = 0, col="blue")
+abline (h = 0, col="black")
 abline (v= as.POSIXct("2020-08-11 02:00:00"), lty = 2,col ="red")
 abline (v= as.POSIXct("2020-08-28 02:00:00"), lty = 2,col ="green")
-
+abline (reg_line_AV,col ="blue")
