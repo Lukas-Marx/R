@@ -250,12 +250,12 @@ Subsequence1.Ende = "2020-08-31"
 Subsequence2.Start = "2020-09-01"
 Subsequence2.Ende ="2020-10-01"
 
-Aktie = ""
+Aktie = "TSLA"
+Vergleichsindex = "^GSPC"
 
-
-AR = abnormalReturn(Aktie,"^GSPC",Start, Ende,model="marketmodel", estimationWindowLength = 1,
+AR = abnormalReturn(Aktie,Vergleichsindex,Subsequence1.Start, Subsequence2.Ende,model="marketmodel", estimationWindowLength = 10,
                          c=5, attributeOfInterest = "Adjusted",showPlot = TRUE)
-AV = abnormalReturn(Aktie,"^GSPC",Start, Ende,model="marketmodel", estimationWindowLength = 1,
+AV = abnormalReturn(Aktie,Vergleichsindex,Subsequence1.Start, Subsequence2.Ende,model="marketmodel", estimationWindowLength = 10,
                          c=5, attributeOfInterest = "Volume",showPlot = TRUE)
 
 Aktie.volume = get.hist.quote(instrument = Aktie, 
@@ -422,11 +422,11 @@ legend("topleft", legend = c("EV_pre", "SD_pre","EV_post","SD_post","Splitdate")
 
 #dev.off()
 
-reg_line_AR = lm(AR_Tsla$abnormalReturn~AR_Tsla$Date)
+reg_line_AR = lm(AR$abnormalReturn~AR$Date)
 AR_reg = fitted.values(reg_line_AR)
 AR_reg_res = residuals(reg_line_AR)
 
-reg_line_AV = lm(AV_Tsla$abnormalReturn~AV_Tsla$Date)
+reg_line_AV = lm(AV$abnormalReturn~AV$Date)
 AV_reg = fitted.values(reg_line_AV)
 AV_reg_res = residuals(reg_line_AV)
 
@@ -442,4 +442,17 @@ abline (v= as.POSIXct("2020-08-11 02:00:00"), lty = 2,col ="red")
 abline (v= as.POSIXct("2020-08-28 02:00:00"), lty = 2,col ="green")
 abline (reg_line_AV,col ="blue")
 
-
+par(mfrow=c(1,1))
+plot(Aktie.Adjusted, xlab="gesamter Zeitraum", ylab='Adjusted Stock  (black)', col="black")
+abline(v=as.Date(Subsequence2.Start),col="green")
+abline(h = Stabw_whole_adj_sub1_up, lty =2, col= "blue")
+abline(h = Stabw_whole_adj_sub1_down, lty =2, col= "blue")
+abline(h = ERW_whole_adj_sub1, col= "blue")
+abline(h = Stabw_whole_adj_sub2_up, lty =2, col= "red")
+abline(h = Stabw_whole_adj_sub2_down, lty =2, col= "red")
+abline(h = ERW_whole_adj_sub2, col= "red")
+par(new=TRUE)
+plot(AR_reg,type = "o", xlab=NA, ylab=NA, col="purple",axes = F)
+axis(side = 4)
+mtext(side=4,'Regression der AR (Lila)')
+legend("topleft", legend = c("EV_pre", "SD_pre","EV_post","SD_post","Eventdate"), col = c("blue","blue","red","red","green"), lty = 1:2,cex = 0.6)
