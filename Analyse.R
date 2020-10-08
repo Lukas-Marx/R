@@ -250,8 +250,8 @@ Regressionszeitraumstart = as.POSIXct(Subsequence1.Start) - (250*24*60*60)
 Subsequence2.Start = "2020-07-01"
 Subsequence2.Ende ="2020-10-02"
 
-Aktie = "TSLA"
-Vergleichsindex = "^GSPC"
+Aktie = "CEV.DE"
+Vergleichsindex = "^GDAXI"
 
 AR = abnormalReturn(Aktie,Vergleichsindex,Subsequence1.Start, Subsequence2.Ende,model="marketmodel", estimationWindowLength = 10,
                          c=10, attributeOfInterest = "Adjusted",showPlot = TRUE)
@@ -263,7 +263,7 @@ Aktie.volume = get.hist.quote(instrument = Aktie,
                                quote = "Volume", provider = "yahoo",
                                compression = "d"
 )
-
+Aktie.volume = na.omit(Aktie.volume)
 
 Aktie.Adjusted = get.hist.quote(instrument = Aktie, 
                                  start = Start, end = Ende,
@@ -271,6 +271,7 @@ Aktie.Adjusted = get.hist.quote(instrument = Aktie,
                                  compression = "d"
 )
 
+Aktie.Adjusted = na.omit(Aktie.Adjusted)
 
 Aktie.volumesub1 = get.hist.quote(instrument = Aktie, 
                                    start = Subsequence1.Start, end = Subsequence1.Ende,
@@ -278,6 +279,7 @@ Aktie.volumesub1 = get.hist.quote(instrument = Aktie,
                                    compression = "d"
 )
 
+Aktie.volumesub1 = na.omit(Aktie.volumesub1)
 
 Aktie.Adjustedsub1 = get.hist.quote(instrument = Aktie, 
                                      start = Subsequence1.Start, end = Subsequence1.Ende,
@@ -285,6 +287,7 @@ Aktie.Adjustedsub1 = get.hist.quote(instrument = Aktie,
                                      compression = "d"
 )
 
+Aktie.Adjustedsub1 = na.omit(Aktie.Adjustedsub1)
 
 Aktie.volumesub2 = get.hist.quote(instrument = Aktie, 
                                    start = Subsequence2.Start, end = Subsequence2.Ende,
@@ -292,6 +295,7 @@ Aktie.volumesub2 = get.hist.quote(instrument = Aktie,
                                    compression = "d"
 )
 
+Aktie.volumesub2 = na.omit(Aktie.volumesub2)
 
 Aktie.Adjustedsub2 = get.hist.quote(instrument = Aktie, 
                                      start = Subsequence2.Start, end = Subsequence2.Ende,
@@ -299,6 +303,7 @@ Aktie.Adjustedsub2 = get.hist.quote(instrument = Aktie,
                                      compression = "d"
 )
 
+Aktie.Adjustedsub2 = na.omit(Aktie.Adjustedsub2)
 
 ERW_whole_vol = mean (Aktie.volume)
 Var_single_vol = (Aktie.volume - ERW_whole_vol)^2
@@ -452,7 +457,7 @@ abline(h = Stabw_whole_adj_sub2_up, lty =2, col= "red")
 abline(h = Stabw_whole_adj_sub2_down, lty =2, col= "red")
 abline(h = ERW_whole_adj_sub2, col= "red")
 par(new=TRUE)
-plot(AR$Date,AR$abnormalReturn,type = "p", xlab=NA, ylab=NA, col="black",axes = F)
+plot(AR$Date,AR$abnormalReturn,type = "n", xlab=NA, ylab=NA, col="purple",axes = F)
 abline (h=0, col="black", lty = 2)
 abline (reg_line_AR, col="purple")
 axis(side = 4)
