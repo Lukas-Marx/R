@@ -241,22 +241,22 @@ plotEventStudy <- function(prices_stock, prices_market,
          col = "green",
          pch = 4)
 }
-Start = "2020-07-30"
+Start = "2020-03-01"
 Ende = "2020-10-01"
 
-Subsequence1.Start= "2020-07-30"
-Subsequence1.Ende = "2020-08-31"
-
-Subsequence2.Start = "2020-09-01"
-Subsequence2.Ende ="2020-10-01"
+Subsequence1.Start= "2020-03-01"
+Subsequence1.Ende = "2020-06-30"
+Regressionszeitraumstart = as.POSIXct(Subsequence1.Start) - (250*24*60*60)
+Subsequence2.Start = "2020-07-01"
+Subsequence2.Ende ="2020-10-02"
 
 Aktie = "TSLA"
 Vergleichsindex = "^GSPC"
 
 AR = abnormalReturn(Aktie,Vergleichsindex,Subsequence1.Start, Subsequence2.Ende,model="marketmodel", estimationWindowLength = 10,
-                         c=5, attributeOfInterest = "Adjusted",showPlot = TRUE)
+                         c=10, attributeOfInterest = "Adjusted",showPlot = TRUE)
 AV = abnormalReturn(Aktie,Vergleichsindex,Subsequence1.Start, Subsequence2.Ende,model="marketmodel", estimationWindowLength = 10,
-                         c=5, attributeOfInterest = "Volume",showPlot = TRUE)
+                         c=10, attributeOfInterest = "Volume",showPlot = TRUE)
 
 Aktie.volume = get.hist.quote(instrument = Aktie, 
                                start = Start, end = Ende,
@@ -443,7 +443,7 @@ abline (v= as.POSIXct("2020-08-28 02:00:00"), lty = 2,col ="green")
 abline (reg_line_AV,col ="blue")
 
 par(mfrow=c(1,1))
-plot(Aktie.Adjusted, xlab="gesamter Zeitraum", ylab='Adjusted Stock  (black)', col="black")
+plot(window(Aktie.Adjusted, start = as.Date(Subsequence1.Start), end = as.Date(Subsequence2.Ende)), xlab="gesamter Zeitraum", ylab='Adjusted Stock  (black)', col="black")
 abline(v=as.Date(Subsequence2.Start),col="green")
 abline(h = Stabw_whole_adj_sub1_up, lty =2, col= "blue")
 abline(h = Stabw_whole_adj_sub1_down, lty =2, col= "blue")
@@ -452,8 +452,9 @@ abline(h = Stabw_whole_adj_sub2_up, lty =2, col= "red")
 abline(h = Stabw_whole_adj_sub2_down, lty =2, col= "red")
 abline(h = ERW_whole_adj_sub2, col= "red")
 par(new=TRUE)
-plot(AR_reg,type = "o", xlab=NA, ylab=NA, col="purple",axes = F)
-abline (h = 0, lty =2, col = "black")
+plot(AR$Date,AR$abnormalReturn,type = "n", xlab=NA, ylab=NA, col="purple",axes = F)
+abline (h=0, col="black", lty = 2)
+abline (reg_line_AR, col="purple")
 axis(side = 4)
 mtext(side=4,'Regression der AR (Lila)')
 legend("topleft", legend = c("EV_pre", "SD_pre","EV_post","SD_post","Eventdate", "AR = 0"), col = c("blue","blue","red","red","green","black"), lty = 1:2,cex = 0.6)
