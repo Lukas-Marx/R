@@ -6,10 +6,15 @@ Aktie = "DHER.DE"
 Vergleichsindex = "^GDAXI"
 
 Start = "2018-08-23"
-Ende = "2020-09-01"
+Ende = "2020-10-09"
 
-Subsequence.Start = "2020-08-24"
-Subsequence.Ende = "2020-09-01"
+Subsequence1.Start = "2020-08-24"
+Subsequence1.Ende = "2020-10-09"
+
+
+Subsequence2.Start = "2020-07-08"
+Subsequence2.Ende = "2020-08-24"
+
 
 
 Aktie.volume1 = get.hist.quote(instrument = Aktie, 
@@ -115,9 +120,9 @@ abline(h = Aktie.mean.Adjusted, col= "blue")
 legend("topleft", legend = c("EV", "SD"), col = c("blue","blue"), lty = 1:2,cex = 0.6)
 
 #Subsequence Volume
-Teilzeitreihe.Volume = window(Aktie.volume, start = as.Date(Subsequence.Start), end = as.Date(Subsequence.Ende))
+Teilzeitreihe.Volume = window(Aktie.volume, start = as.Date(Subsequence1.Start), end = as.Date(Subsequence1.Ende))
 #Subsequence Adjusted
-Teilzeitreihe.Adjusted = window(Aktie.Adjusted, start = as.Date(Subsequence.Start), end = as.Date(Subsequence.Ende))               
+Teilzeitreihe.Adjusted = window(Aktie.Adjusted, start = as.Date(Subsequence1.Start), end = as.Date(Subsequence1.Ende))               
 
 #Aktie Volumen Subsequence
 plot(Teilzeitreihe.Volume, xlab="Zeitraum", ylab='Volume (purple)', col="purple")
@@ -132,6 +137,26 @@ abline(h = Aktie.Stabw.Adjusted.down, lty =2, col= "blue")
 abline(h = Aktie.Stabw.Adjusted.up, lty =2, col= "blue")
 abline(h = Aktie.mean.Adjusted, col= "blue")
 legend("topleft", legend = c("EV", "SD"), col = c("blue","blue"), lty = 1:2,cex = 0.6)
+
+#Subsequence Volume
+Teilzeitreihe2.Volume = window(Aktie.volume, start = as.Date(Subsequence2.Start), end = as.Date(Subsequence2.Ende))
+#Subsequence Adjusted
+Teilzeitreihe2.Adjusted = window(Aktie.Adjusted, start = as.Date(Subsequence2.Start), end = as.Date(Subsequence2.Ende))               
+
+#Aktie Volumen Subsequence
+plot(Teilzeitreihe2.Volume, xlab="Zeitraum", ylab='Volume (purple)', col="purple")
+abline(h = Aktie.Stabw.volume.down, lty =2, col= "blue")
+abline(h = Aktie.Stabw.volume.up, lty =2, col= "blue")
+abline(h = Aktie.mean.volume, col= "blue")
+legend("topleft", legend = c("EV", "SD"), col = c("blue","blue"), lty = 1:2,cex = 0.6)
+
+#Aktie Adjusted Subsequence
+plot(Teilzeitreihe.Adjusted2, xlab="Zeitraum", ylab='Aktie (green)', col="green")
+abline(h = Aktie.Stabw.Adjusted.down, lty =2, col= "blue")
+abline(h = Aktie.Stabw.Adjusted.up, lty =2, col= "blue")
+abline(h = Aktie.mean.Adjusted, col= "blue")
+legend("topleft", legend = c("EV", "SD"), col = c("blue","blue"), lty = 1:2,cex = 0.6)
+
 
 #Index Adjusted 
 plot(Index.Adjusted, xlab="Zeitraum", ylab='Index (red)', col="red")
@@ -160,4 +185,6 @@ par(new=TRUE)
 plot(Index.Adjusted, xlab=NA, ylab=NA, col="red",axes = F)
 axis(side = 4)
 mtext(side=4,'Index (red)')
+
+
 
